@@ -6,18 +6,4 @@
 
     <context:component-scan base-package="\*"/>
 
-    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
-        <property name="dataSource" ref="dataSource" />
-        <property name="changeLog" value="classpath:changelog-db.xml" />
-        <property name="contexts" value="test, production" />
-    </bean>
-
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_c84694dc9cc3e36" />
-        <property name="username" value="bd45281a0339ee" />
-        <property name="password" value="6e0017fc" />
-    </bean>
-
 </beans>

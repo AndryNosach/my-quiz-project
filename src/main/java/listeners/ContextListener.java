@@ -14,7 +14,7 @@ public class ContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context=sce.getServletContext();
-        String dburl="jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_c84694dc9cc3e36?useUnicode=true&characterEncoding=UTF8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String dburl="jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_c84694dc9cc3e36";
         String dbusername= "bd45281a0339ee";
         String dbpassword="6e0017fc";
 
