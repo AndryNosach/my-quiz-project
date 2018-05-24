@@ -100,12 +100,6 @@
       <artifactId>heroku-jdbc</artifactId>
       <version>0.1.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-maven-plugin -->
-    <dependency>
-      <groupId>com.heroku.sdk</groupId>
-      <artifactId>heroku-maven-plugin</artifactId>
-      <version>2.0.4</version>
-    </dependency>
       <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
       <dependency>
           <groupId>org.apache.maven.plugins</groupId>
@@ -119,6 +113,13 @@
 
 
   <build>
+
+    <resources>
+      <resource>
+        <directory>src/webapp/resources</directory>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -142,6 +143,7 @@
         </executions>
       </plugin>
     </plugins>
+
   </build>
 
 </project>
