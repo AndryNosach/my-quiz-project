@@ -82,6 +82,7 @@ public class QuizDAOImpl implements QuizDAO {
         Connection  conn = DBConnector.getConnection();
         List<Quiz> listOfQuizzies = new ArrayList<>();
         try {
+            logger.info("Getting ALL quizzies");
             String query = "SELECT * FROM quizzies";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();

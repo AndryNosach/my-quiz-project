@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SubjectDAOImpl implements SubjectDAO{
+public class SubjectDAOImpl implements SubjectDAO {
 
     private static final Logger logger = Logger.getLogger(SubjectDAOImpl.class);
 

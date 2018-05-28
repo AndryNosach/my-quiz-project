@@ -10,5 +10,5 @@ public interface QuestionDAO {
 
     public Question getQuestion(int id);
 
-    public List<Question> getQuestionsForQuiz (int quizId);
+    public List<Question> getQuestionsForQuiz(int quizId);
 }

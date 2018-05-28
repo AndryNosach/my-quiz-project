@@ -1,7 +1,6 @@
 package service;
 
 import dao.QuizDAO;
-import dao.QuizDAOImpl;
 import entity.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

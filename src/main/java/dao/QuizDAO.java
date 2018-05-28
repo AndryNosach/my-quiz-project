@@ -8,7 +8,7 @@ public interface QuizDAO {
 
     public int addQuiz(Quiz quiz, int subjId);
 
-    public Quiz getQuiz (int id);
+    public Quiz getQuiz(int id);
 
     public List<Quiz> getAllQuizzies();
 

@@ -1,7 +1,6 @@
 package service;
 
 import dao.QuestionDAO;
-import dao.QuestionDAOImpl;
 import entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

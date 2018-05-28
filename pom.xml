@@ -83,6 +83,12 @@
       <artifactId>spring-jdbc</artifactId>
       <version>2.0.6</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
     <dependency>
     <groupId>com.sparkjava</groupId>
@@ -106,8 +112,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <version>3.0.2</version>
       </dependency>
-
-
 
   </dependencies>
 

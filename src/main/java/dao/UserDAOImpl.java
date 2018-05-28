@@ -3,8 +3,6 @@ package dao;
 import dao.connector.DBConnector;
 import entity.User;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -17,11 +15,8 @@ public class UserDAOImpl implements UserDAO {
 
     private static final Logger logger = Logger.getLogger(UserDAOImpl.class);
 
-    public UserDAOImpl() {
-    }
-
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         Connection con = DBConnector.getConnection();
         try {
             String query = "INSERT into USERS (login, password, name, email) VALUES (?, ?, ?, ?)";
@@ -34,9 +29,11 @@ public class UserDAOImpl implements UserDAO {
             logger.info("Adding user "+user.getLogin()+" to db");
 
             ps.executeUpdate();
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
