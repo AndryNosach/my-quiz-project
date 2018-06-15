@@ -19,7 +19,7 @@ public class QuizConfiguration {
     public SpringLiquibase springLiquibase(){
         SpringLiquibase springLiquibase = new SpringLiquibase();
         springLiquibase.setDataSource(dataSource());
-        springLiquibase.setChangeLog("classpath:changelog-db.xml");
+        springLiquibase.setChangeLog("changelog-db.xml");
         springLiquibase.setContexts("test, production");
         return springLiquibase;
     }
