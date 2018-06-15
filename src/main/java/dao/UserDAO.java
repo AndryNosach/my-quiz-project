@@ -6,5 +6,5 @@ public interface UserDAO {
 
     public boolean addUser (User user);
 
-    public User getUser(String login);
+    public User getUser (String login);
 }

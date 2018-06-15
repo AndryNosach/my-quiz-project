@@ -3,15 +3,19 @@ package controllers;
 import entity.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import service.UserService;
 
 import javax.servlet.http.HttpSession;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 public class UserController {
@@ -22,21 +26,18 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(method = GET, value = "register")
-    public String getRegistrationPage() {
+    public String getRegistrationPage(Model model) {
+        model.addAttribute("user", new User());
         return "register-page";
     }
 
     @RequestMapping(method = POST, value = "register")
-    public String doRegistration(WebRequest req, HttpSession session) {
-        String login = req.getParameter("login");
-        String pass = req.getParameter("pass");
-        String email = req.getParameter("email");
-        String name = req.getParameter("name");
+    public String doRegistration(WebRequest req, HttpSession session, @ModelAttribute("user") User user) {
 
-        if(userService.addUser(new User(login, pass, name, email))){
-            session.setAttribute("login", login);
+        if(userService.addUser(user)){
+            session.setAttribute("login", user.getLogin());
             session.setAttribute("authorized", "true");
-            return "redirect:list";
+            return "redirect:available";
         }
         else return "redirect:register";
     }
@@ -47,17 +48,29 @@ public class UserController {
     }
 
     @RequestMapping(method = POST, value = "login")
-    public String doLogin(WebRequest req, HttpSession session){
-        session.setAttribute("login", req.getParameter("login"));
-        session.setAttribute("pass", req.getParameter("pass"));
+    public String doLogin(@RequestParam("login") String login, @RequestParam("pass") String password, HttpSession session){
 
-        logger.info("User "+req.getParameter("login")+ " added to session");
+        User user = userService.getUser(login);
 
-        return "redirect:list";
+        if (login == null || password==null || user == null){
+            return "redirect:login";
+        }
+
+        PasswordEncoder encoder= new BCryptPasswordEncoder();
+        if (encoder.matches(password, user.getPassword())) {
+            logger.info("User "+login+" found in db and authorized ");
+            session.setAttribute("authorized", "true");
+            session.setAttribute("login", login);
+            return "redirect:available";
+        }
+        else {
+            logger.info("Wrong password for user "+login);
+            return "redirect:login";
+        }
     }
 
     @RequestMapping(method = GET, value = "logout")
-    public String doLogout(WebRequest req, HttpSession session){
+    public String doLogout(HttpSession session){
         logger.info("current session closed for user "+session.getAttribute("login").toString());
 
         session.invalidate();

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface QuizDAO {
 
-    public int addQuiz(Quiz quiz, int subjId);
+    public int addQuiz(Quiz quiz);
 
-    public Quiz getQuiz(int id);
+    public Quiz getQuiz (int id);
 
     public List<Quiz> getAllQuizzies();
 
