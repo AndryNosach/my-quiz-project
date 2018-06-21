@@ -28,7 +28,8 @@ public class SubjectHibernateDAOImpl implements SubjectDAO {
     final Session session;
     Logger logger = Logger.getLogger(SubjectHibernateDAOImpl.class);
 
-    public SubjectHibernateDAOImpl(@Autowired SessionFactory sessionFactory) {
+    @Autowired
+    public SubjectHibernateDAOImpl(SessionFactory sessionFactory) {
         this.session = sessionFactory.openSession();
     }
 

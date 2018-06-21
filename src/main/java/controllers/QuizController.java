@@ -18,6 +18,7 @@ import service.builder.QuizBuilder;
 import service.builder.StatisticBuilder;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,11 @@ public class QuizController {
 
     List<Question> questions;
     StatisticBuilder statisticBuilder;
+
+    @RequestMapping(method = POST, value = "available")
+    public String showAvailable(){
+        return "redirect:available";
+    }
 
     @RequestMapping(method = GET, value = "available")
     public String showAvailableSubjects(Model model){
@@ -74,7 +80,7 @@ public class QuizController {
     }
 
     @RequestMapping(method = POST, value = "add")
-    public String addQuizBasicInfo(HttpSession session, WebRequest req){
+    public String addQuizBasicInfo(HttpSession session, WebRequest req, Principal principal){
         if(session.getAttribute("builder") == null){
             quizBuilder.clean();
             session.setAttribute("builder", quizBuilder);
@@ -89,7 +95,7 @@ public class QuizController {
         }
         quizBuilder.addSubject(subject);
         quizBuilder.addTheme(req.getParameter("theme"));
-        quizBuilder.addAuthor(session.getAttribute("login").toString());
+        quizBuilder.addAuthor(principal.getName());
 
         return "redirect:/question";
     }

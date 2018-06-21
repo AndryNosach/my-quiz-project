@@ -48,8 +48,10 @@
                                 <td>${quiz.getAuthor()}</td>
                                 <td>
                                     <a  href="/pass/${quiz.getId()}">Pass</a>
-                                    |
-                                    <a  class="delete${id}" href="/delete/${quiz.getId()}">Delete</a>
+                                    <sec:authorize access="hasAuthority('admin')">
+                                        |
+                                        <a  class="delete${id}" href="/delete/${quiz.getId()}">Delete</a>
+                                    </sec:authorize>
                                 </td>
                                 <c:set var="id" scope="page" value="${id+1}"/>
                              </tr>
