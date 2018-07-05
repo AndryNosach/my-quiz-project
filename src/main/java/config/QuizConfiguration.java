@@ -4,18 +4,23 @@ import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 import javax.sql.DataSource;
+import java.util.Locale;
 
 
 @Configuration
 @ComponentScan({"controllers", "dao", "entity", "filters", "service"})
+@EnableWebMvc
 public class QuizConfiguration {
 
     @Bean
@@ -55,6 +60,20 @@ public class QuizConfiguration {
         return transactionManager;
     }
 
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource(){
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        messageSource.setDefaultEncoding("utf-8");
+        return messageSource;
+    }
+
+    @Bean
+    public CookieLocaleResolver localeResolver(){
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+       localeResolver.setDefaultLocale(new Locale("en"));
+        return localeResolver;
+    }
 
 }
 
