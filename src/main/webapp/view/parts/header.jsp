@@ -18,8 +18,25 @@
                 <li class="account-name logout-href" >
                     <a href="/logout"><spring:message code="header.logout"/></a>
                 </li>
-                <li><a href="?locale=en" class="language" rel="it-IT"><img src="${pageContext.request.contextPath}/resources/images/en_US.png" alt="English" /></a></li>
-                <li><a href="?locale=ru" class="language" rel="en-US"><img src="${pageContext.request.contextPath}/resources/images/uk_UA.png" alt="Ukrainian" /></a></li>
+                <spring:url value="${requestScope['javax.servlet.forward.request_uri']}" var="url" htmlEscape="true"/>
+                <c:choose>
+                    <c:when test="${empty param['subj']}">
+                        <li><a href="${url}?locale=en"
+                               class="language" rel="en-Us"><img src="${pageContext.request.contextPath}/resources/images/en_US.png" alt="English" />
+                        </a></li>
+                        <li><a href="${url}?locale=ru"
+                               class="language" rel="uk-Ua"><img src="${pageContext.request.contextPath}/resources/images/uk_UA.png" alt="Ukrainian" />
+                        </a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${url}?subj=${param['subj']}&locale=en"
+                               class="language" rel="en-Us"><img src="${pageContext.request.contextPath}/resources/images/en_US.png" alt="English" />
+                        </a></li>
+                        <li><a href="${url}?subj=${param['subj']}&locale=ru"
+                               class="language" rel="uk-Ua"><img src="${pageContext.request.contextPath}/resources/images/uk_UA.png" alt="Ukrainian" />
+                        </a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
 
 
