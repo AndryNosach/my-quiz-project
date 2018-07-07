@@ -63,7 +63,7 @@ public class QuizConfiguration {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename("/resources/messages");
         messageSource.setDefaultEncoding("utf-8");
         return messageSource;
     }
